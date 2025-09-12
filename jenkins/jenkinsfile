@@ -9,10 +9,6 @@ pipeline {
                     reuseNode true
                 }
             }
-            environment {
-                // put go build cache inside the Jenkins workspace
-                GOCACHE = "${WORKSPACE}/.gocache"
-            }
             steps {
                 dir('bugtracker-backend') {
                     sh 'go test -v ./...'
