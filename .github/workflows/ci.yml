@@ -168,3 +168,11 @@ jobs:
             name: api-test-playwright-reports
             path: ./tests-api/playwright-report
             retention-days: 30
+      
+        - name: Publish API Test Report
+          if: always()
+          uses: dorny/test-reporter@v1
+          with:
+            name: API Test Report
+            path: ./tests-api/test-results/*.xml
+            reporter: jest-junit
