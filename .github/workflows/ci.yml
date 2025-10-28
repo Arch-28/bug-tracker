@@ -192,5 +192,5 @@ jobs:
           uses: dorny/test-reporter@v1
           with:
             name: E2E Test Report
-            path: ./tests-ape2ei/test-results/results.xml
+            path: ./tests-e2e/test-results/results.xml
             reporter: jest-junit
