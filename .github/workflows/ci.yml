@@ -115,7 +115,7 @@ jobs:
               ${{ needs.unit-tests-frontend.outputs.test-output }}
               ´´´          
           
-    api-e2e-tests:
+    api-e2e-perf-tests:
       needs: [unit-tests-backend, unit-tests-frontend]
       runs-on: ubuntu-latest
     
@@ -142,6 +142,15 @@ jobs:
             npm ci
             npx playwright install
             npx playwright test
+
+        - name: Setup K6
+          uses: grafana/setup-k6-action@v1
+          
+        - name: Run Performance Tests
+          uses: grafana/run-k6-action@v1
+          with:
+            path: ./tests-perfperf/script.js
+            flags: --out json=summary.json
 
         - name: Shutdow the Application
           run: |
