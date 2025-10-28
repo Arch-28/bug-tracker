@@ -130,7 +130,7 @@ jobs:
           run: |
                 go test -v ./e2e/...
               
-    api-tests:
+    api-e2eNew-tests:
       needs: [unit-tests-backend, unit-tests-frontend]
       runs-on: ubuntu-latest
     
@@ -147,6 +147,15 @@ jobs:
           working-directory: ./tests-api
           run: |
             npm ci
+            npx playwright test
+        
+        - name: Run E2E Tests
+          working-directory: ./tests-e2e
+          env:
+            CI: "1"
+          run: |
+            npm ci
+            npx playwright install
             npx playwright test
 
         - name: Shutdow the Application
